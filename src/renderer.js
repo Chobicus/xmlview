@@ -66,6 +66,10 @@
 						result.push(stylize(node.childNodes[i], depth));
 					}
 					return result.join('');
+				case 10: // document type
+				case 11: // document fragment
+				case 12: // notation
+					return '';
 				default:
 					if (window.console)
 						console.log('processing unknown type:', node.nodeType);
@@ -149,6 +153,21 @@
 	}
 	
 	function processText(text) {
+		// check if it is XML and try to parse it
+		var isXML = false;
+		if (typeof text == 'string') {			
+			try {
+				text = xv_utils.toXml(text);
+				isXML = true;
+			} catch(e) {
+				//..
+			}
+		}		
+		if (isXML) {
+			return stylizeElement(text, 20);
+		}
+		// end of XML check/parse
+		
 		var urls = xv_utils.findURLs(xv_utils.trim(text));
 
 		var result = _.map(urls, function (text, i) {

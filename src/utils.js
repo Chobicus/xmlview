@@ -101,7 +101,6 @@ var xv_utils = (function(){
 						
 						
 				var error = result.getElementsByTagName('parsererror')[0];
-				console.log(error);
 				throw "<h2>Can’t parse XML document</h2> \n" + (error ? error.textContent : '');
 			}
 			

@@ -197,7 +197,7 @@ var xv_controller = (function(){
 			}
 			
 			if (data) {
-				var tree = xv_renderer.render(data, xv_settings.getValue('init_depth', 2));
+				var tree = xv_renderer.render(data, xv_settings.getValue('init_depth', 10));
 				
 				if (!pane)
 					pane = xv_dom.getOneByClass('xv-source-pane-inner');
